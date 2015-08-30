@@ -2,6 +2,7 @@
   <strong>Title:</strong>
   <%= @category.title %>
 </p>
-
+<% if current_user.role == "admin" %>
 <%= link_to 'Edit', edit_category_path(@category) %>
+<% end %>
 <%= link_to 'Back', categories_path %>

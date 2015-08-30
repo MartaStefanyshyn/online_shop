@@ -2,6 +2,7 @@
   <div class="navbar-inner">
     <div class="container">
       <%= link_to "ONLINE SHOP", root_path, id: "logo" %>
+      <%= link_to "Categories", categories_path, id: "categ", :class => 'navbar-link'%>
       <nav>
         <p class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
