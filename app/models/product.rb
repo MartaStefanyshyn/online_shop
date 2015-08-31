@@ -3,4 +3,6 @@ class Product < ActiveRecord::Base
 	belongs_to :category
 	has_attached_file :photo, styles:{ large:"600x600>", medium: "300x300>", thumb: "100x100#"}
 	validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
+	validates :name, :description, :price, presence: true
+	validates :price, numericality: { greater_than_or_equal_to: 0.5 }
 end
