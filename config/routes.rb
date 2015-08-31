@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :categories
+  resources :products
   devise_for :users
   root 'static_pages#main'
   match '/contact', to: 'static_pages#contact', via: 'get'

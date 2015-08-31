@@ -4,8 +4,8 @@ class CategoriesController < ApplicationController
 
 	def index
 		if !user_signed_in?
-          redirect_to root_path
-        else
+      redirect_to root_path
+    else
 		  @categories = Category.all
 		end
 	end
