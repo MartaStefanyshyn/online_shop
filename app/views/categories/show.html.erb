@@ -1,7 +1,15 @@
-<p>
-  <strong>Title:</strong>
-  <%= @category.title %>
-</p>
+<% @category.products.in_groups_of(3) do |group| %>
+  <div class="row">
+    <% group.compact.each do |product| %>
+      <div class="col-md-4">
+        <%= image_tag product.photo.url(:medium)%>
+        <h4><%= link_to product.name, product %></h4>
+        <p>Price: $<%= product.price %></p>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
 <% if current_user.role == "admin" %>
 <%= link_to 'Edit', edit_category_path(@category) %>
 <% end %>

@@ -1,6 +1,5 @@
 
-<%= image_tag @product.photo.url(:medium) %>
-<p>
+<!-- <p>
   <strong>Category:</strong>
   <%= @product.category.title %>
 </p>
@@ -15,9 +14,22 @@
 <p>
   <strong>Price:</strong>
   <%= @product.price %>
-</p>
+</p> -->
 
-<% if current_user.role == "admin" %>
-<%= link_to 'Edit', edit_product_path(@product) %>
-<% end %>
-<%= link_to 'Back', products_path %>
+<div class="row">
+  <div class="col-md-9">
+    <%= image_tag @product.photo.url(:medium) %> 
+  </div>
+
+  <div class="col-md-3">
+    <p><b>Name: </b><%= @product.name %></p>
+    <p><b>Description: </b><%= @product.description %></p>
+    <p><b>Price: </b><%= @product.price %></p>
+    <p>
+      <% if current_user.role == "admin" %><%= link_to 'Edit', edit_product_path(@product) %> |
+      <%= link_to 'Destroy', @product, data: { confirm: 'Are you sure?' }, method: :delete %> |<% end %>
+      <%= link_to 'Back', products_path %>
+    </p>
+  </div>
+</div>
+

@@ -1,26 +1,19 @@
 <h1>Categories</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @categories.each do |category| %>
-      <tr>
-        <td><%= category.title %></td>
-        <td><%= link_to 'Show', category %></td>
-        <td><% if current_user.role == "admin" %><%= link_to 'Edit', edit_category_path(category) %><% end %></td>
-        <td><% if current_user.role == "admin" %><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %><% end %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+ <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <div class="list-group">
+          <% @categories.each do |category| %>
+            <%= link_to category.title, category, :class => 'list-group-item' %>
+            <% if current_user.role == "admin" %><%= link_to 'Edit', edit_category_path(category) %><% end %>
+            <% if current_user.role == "admin" %><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %><% end %>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
 <br>
 <% if current_user.role == "admin" %>
 <%= link_to 'New Category', new_category_path %>
 <% end %>
+
