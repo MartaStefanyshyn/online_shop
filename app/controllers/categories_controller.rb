@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
 	before_action :set_category, only: [:show, :edit, :update, :destroy]
-	before_action :authenticate_user!#:check_authentification, only: [:create, :update, :destroy]
+	before_action :authenticate_user!
 
 	def index
 		if !user_signed_in?
@@ -12,16 +12,16 @@ class CategoriesController < ApplicationController
 
 	def show
 		if !user_signed_in?
-          head :forbidden
-        else
-         @category = Category.find(params[:id])
-        end
+      head :forbidden
+    else
+      @category = Category.find(params[:id])
+    end
 	end
 
 	def new
 		if !user_signed_in?
-          head :forbidden
-        else
+      head :forbidden
+    else
 		  @category = Category.new
 		end
 	end
@@ -45,32 +45,32 @@ class CategoriesController < ApplicationController
 
     def update
       if current_user.role == "admin"
-		 @category = current_user.categories.find(params[:id])
+		  @category = current_user.categories.find(params[:id])
          respond_to do |format|
-        if @category.update(category_params)
-          format.html { redirect_to @category, notice: 'Category was successfully updated.' }
-          format.json { render :show, status: :ok, location: @category }
-        else
-          format.html { render :edit }
-          format.json { render json: @category.errors, status: :unprocessable_entity }
-        end
+           if @category.update(category_params)
+             format.html { redirect_to @category, notice: 'Category was successfully updated.' }
+             format.json { render :show, status: :ok, location: @category }
+           else
+             format.html { render :edit }
+             format.json { render json: @category.errors, status: :unprocessable_entity }
+           end
+         end
+      else
+  	     head :forbidden
       end
-  else
-  	head :forbidden
-       end
     end
 
     def destroy
-    if current_user.role == "admin"
-       @category = current_user.categories.find(params[:id])
-       @category.destroy
-       respond_to do |format|
-        format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
-        format.json { head :no_content }
+      if current_user.role == "admin"
+        @category = current_user.categories.find(params[:id])
+        @category.destroy
+        respond_to do |format|
+          format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
+          format.json { head :no_content }
+        end
+      else
+  	    head :forbidden
       end
-  else
-  	head :forbidden
-     end
     end
 
     private
