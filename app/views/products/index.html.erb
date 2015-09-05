@@ -6,6 +6,7 @@
         <%= image_tag product.photo.url(:medium)%>
         <h4><%= link_to product.name, product %></h4>
         <p>Price: $<%= product.price %></p>
+        <%= button_to 'Add to Order', order_products_path(product_id: product) %>
       </div>
     <% end %>
   </div>

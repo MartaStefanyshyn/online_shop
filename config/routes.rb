@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   resources :categories
   resources :products
+  resources :order_products
+  resources :orders
   devise_for :users
   root 'static_pages#main'
   match '/contact', to: 'static_pages#contact', via: 'get'

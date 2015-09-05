@@ -1,3 +1,4 @@
+<h1>Products</h1>
 <% @category.products.in_groups_of(3) do |group| %>
   <div class="row">
     <% group.compact.each do |product| %>
@@ -5,6 +6,7 @@
         <%= image_tag product.photo.url(:medium)%>
         <h4><%= link_to product.name, product %></h4>
         <p>Price: $<%= product.price %></p>
+        <%= button_to 'Add to Order', order_products_path(product_id: product) %>
       </div>
     <% end %>
   </div>

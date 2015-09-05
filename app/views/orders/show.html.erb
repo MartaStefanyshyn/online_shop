@@ -1,0 +1,10 @@
+<h2>Your Order</h2>
+<ul>
+ <% @order.order_products.each do |item| %>
+ <li><%= item.product.name %></li>
+ <% end %>
+</ul>
+<%= link_to 'Finish', @order %>
+</br>
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>
