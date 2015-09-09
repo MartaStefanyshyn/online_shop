@@ -46,11 +46,32 @@ before_action :set_order_product, only: [:show, :edit, :update, :destroy]
 
   
   def destroy
+    @order = current_order
     @order_product.destroy
     respond_to do |format|
-      format.html { redirect_to order_products_url, notice: 'Order product was successfully destroyed.' }
+      format.html { redirect_to @order, notice: 'Order product was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def minus
+    @order = current_order
+    @order_product = OrderProduct.find(params[:id])
+    if @order_product.amount > 1
+        @order_product.amount -=1
+        @order_product.save
+    elsif @order_product.amount == 1
+      @order_product.destroy
+    end
+    redirect_to @order
+  end
+
+  def plus
+    @order = current_order
+    @order_product = OrderProduct.find(params[:id])
+    @order_product.amount +=1
+    @order_product.save
+    redirect_to @order
   end
 
   private

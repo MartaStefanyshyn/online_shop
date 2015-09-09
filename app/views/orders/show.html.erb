@@ -2,6 +2,10 @@
 <ul>
  <% @order.order_products.each do |item| %>
  <li><%= item.amount %> &times; <li><%= item.product.name %></li>
+ <li><%= link_to 'Edit', edit_order_product_path(item) %></li>
+ <li><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+ <li><%= link_to 'minus', minus_order_product_path(item) %></li>
+ <li><%= link_to 'plus', plus_order_product_path(item) %></li>
  <% end %>
 </ul>
 <%= link_to 'Finish', @order %>

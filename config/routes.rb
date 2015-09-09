@@ -2,7 +2,12 @@ Rails.application.routes.draw do
 
   resources :categories
   resources :products
-  resources :order_products
+  resources :order_products do
+    member do
+      get :minus
+      get :plus
+    end
+  end
   resources :orders
   devise_for :users
   root 'static_pages#main'
