@@ -5,10 +5,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_order
 
   def current_order
-    if !session[:order_id].nil?
-      Order.find(session[:order_id])
-    else
-      Order.new
-    end
+    @order = current_user.orders.find_by(state: "active")
+    rescue ActiveRecord::RecordNotFound
+    @order = current_user.orders.create
+    @order
   end
 end

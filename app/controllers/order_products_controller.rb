@@ -1,7 +1,5 @@
 class OrderProductsController < ApplicationController
-include CurrentOrder
 before_action :set_order_product, only: [:show, :edit, :update, :destroy]
-before_action :set_order, only: [:create]
 
   def index
     @order_products = OrderProduct.all
@@ -19,7 +17,8 @@ before_action :set_order, only: [:create]
 
   def create
    product = Product.find(params[:product_id])
-   @order_product = @order.order_products.build(product: product)
+   @order = current_order
+   @order_product = @order.add_product(product.id)
 
    respond_to do |format|
      if @order_product.save
@@ -61,6 +60,6 @@ before_action :set_order, only: [:create]
     end
 
     def order_product_params
-      params[:order_product]
+      params(:order_product).permit(:amount)
     end
 end

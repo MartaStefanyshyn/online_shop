@@ -1,7 +1,7 @@
 <h2>Your Order</h2>
 <ul>
  <% @order.order_products.each do |item| %>
- <li><%= item.product.name %></li>
+ <li><%= item.amount %> &times; <li><%= item.product.name %></li>
  <% end %>
 </ul>
 <%= link_to 'Finish', @order %>
