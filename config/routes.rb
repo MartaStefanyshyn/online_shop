@@ -8,7 +8,11 @@ Rails.application.routes.draw do
       get :plus
     end
   end
-  resources :orders
+  resources :orders do
+    member do
+      get :finish
+    end
+  end
   devise_for :users
   root 'static_pages#main'
   match '/contact', to: 'static_pages#contact', via: 'get'

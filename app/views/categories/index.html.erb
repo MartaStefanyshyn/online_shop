@@ -5,8 +5,8 @@
           <div class="list-group">
           <% @categories.each do |category| %>
             <%= link_to category.title, category, :class => 'list-group-item' %>
-            <% if current_user.role == "admin" %><%= link_to 'Edit', edit_category_path(category) %><% end %>
-            <% if current_user.role == "admin" %><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %><% end %>
+            <% if current_user.role == "admin" %><%= link_to 'Edit', edit_category_path(category), class: 'btn btn-primary btn-xs' %><% end %>
+            <% if current_user.role == "admin" %><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %><% end %>
           <% end %>
           </div>
         </div>
@@ -14,6 +14,8 @@
     </div>
 <br>
 <% if current_user.role == "admin" %>
-<%= link_to 'New Category', new_category_path %>
+<%= link_to new_category_path, class: 'btn btn-success' do %>
+  <i class="glyphicon glyphicon-plus"></i> New Category
+<% end %>
 <% end %>
 

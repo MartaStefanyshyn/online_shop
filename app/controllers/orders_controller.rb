@@ -59,6 +59,13 @@ class OrdersController < ApplicationController
     end
   end
 
+  def finish
+    @order = current_user.orders.find(params[:id])
+    @order.state = "ordered"
+    @order.save
+    redirect_to orders_path
+  end
+
   private
     
     def set_order
@@ -67,7 +74,7 @@ class OrdersController < ApplicationController
 
     
     def order_params
-      params(:order).permit(:status)
+      params[:order]
     end
 end
 

@@ -6,4 +6,9 @@ class Product < ActiveRecord::Base
 	validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
 	validates :name, :description, :price, presence: true
 	validates :price, numericality: { greater_than_or_equal_to: 0.5 }
+
+	# define_index do
+	# 	indexes content
+	# 	indexes :name, sortable: true
+	# end
 end

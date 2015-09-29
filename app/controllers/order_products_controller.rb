@@ -1,5 +1,5 @@
 class OrderProductsController < ApplicationController
-before_action :set_order_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_order_product, only: [:show, :edit, :update, :destroy]
 
   def index
     @order_products = OrderProduct.all
@@ -16,8 +16,8 @@ before_action :set_order_product, only: [:show, :edit, :update, :destroy]
   end
 
   def create
-   product = Product.find(params[:product_id])
    @order = current_order
+   product = Product.find(params[:product_id])
    @order_product = @order.add_product(product.id)
 
    respond_to do |format|
@@ -33,9 +33,10 @@ before_action :set_order_product, only: [:show, :edit, :update, :destroy]
 
   
   def update
+    @order = current_order
     respond_to do |format|
       if @order_product.update(order_product_params)
-        format.html { redirect_to @order_product, notice: 'Order product was successfully updated.' }
+        format.html { redirect_to @order, notice: 'Order product was successfully updated.' }
         format.json { render :show, status: :ok, location: @order_product }
       else
         format.html { render :edit }
@@ -63,7 +64,7 @@ before_action :set_order_product, only: [:show, :edit, :update, :destroy]
     elsif @order_product.amount == 1
       @order_product.destroy
     end
-    redirect_to @order
+   redirect_to @order
   end
 
   def plus
@@ -81,6 +82,6 @@ before_action :set_order_product, only: [:show, :edit, :update, :destroy]
     end
 
     def order_product_params
-      params(:order_product).permit(:amount)
+      params.require(:order_product).permit(:amount)
     end
 end

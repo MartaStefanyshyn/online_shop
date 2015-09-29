@@ -1,14 +1,49 @@
-<h2>Your Order</h2>
-<ul>
- <% @order.order_products.each do |item| %>
- <li><%= item.amount %> &times; <li><%= item.product.name %></li>
- <li><%= link_to 'Edit', edit_order_product_path(item) %></li>
- <li><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></li>
- <li><%= link_to 'minus', minus_order_product_path(item) %></li>
- <li><%= link_to 'plus', plus_order_product_path(item) %></li>
- <% end %>
-</ul>
-<%= link_to 'Finish', @order %>
+<div class="container-fluid">
+
+<h1>Your Order</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Amount</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Total price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.order_products.each do |item| %>
+    <% if @order.state == "ordered" %>
+      <tr>
+        <td><%= item.amount %></td>
+        <td><%= item.product.name %></td>
+        <td><%= item.product.description %></td>
+        <td><%= item.product.price %></td>
+        <td><%= item.total_price %></td>
+      </tr>
+      <% else %>
+      <tr>
+        <td><%= item.amount %></td>
+        <td><%= item.product.name %></td>
+        <td><%= item.product.description %></td>
+        <td><%= item.product.price %></td>
+        <td><%= item.total_price %></td>
+        <td><%= link_to 'Edit', edit_order_product_path(item), class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+<h2> Total: <%= @order.total %></h2>
+<% if @order.state == "active" %>
+<%= link_to 'Finish', finish_order_path(@order), data: { confirm: 'Are you sure you want to finish this order?' } , class: 'btn btn-primary' %>
+<% end %>
+</div>
 </br>
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+<%= link_to orders_path, class: 'btn btn-info btn-xs' do%>
+ <i class="glyphicon glyphicon-menu-left"></i>Back
+ <% end %>
+

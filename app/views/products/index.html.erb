@@ -5,13 +5,15 @@
       <div class="col-md-4">
         <%= image_tag product.photo.url(:medium)%>
         <h4><%= link_to product.name, product %></h4>
-        <p>Price: $<%= product.price %></p>
-        <%= button_to 'Add to Order', order_products_path(product_id: product) %>
+        <p>Price: <%= number_to_currency(product.price) %></p>
+        <%= button_to 'Add to Order', order_products_path(product_id: product), :class => "btn btn-primary"%>
       </div>
     <% end %>
   </div>
 <% end %>
 <br>
 <% if current_user.role == "admin" %>
-<%= link_to 'New Product', new_product_path %>
+<%= link_to new_product_path, class: 'btn btn-success' do %>
+  <i class="glyphicon glyphicon-plus"></i> New Product
+<% end %>
 <% end %>

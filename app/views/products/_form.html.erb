@@ -12,27 +12,27 @@
   <% end %>
 
   
-  <div class="field">
+  <div class="form-group">
     <%= f.label :category_id %><br>
-    <%= collection_select(:product, :category_id, @categories, :id, :title, {:prompt => false })  %>
+    <%= collection_select(:product, :category_id, @categories, :id, :title, {:prompt => false }, class: "form-control")  %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :description %><br>
-    <%= f.text_area :description%>
+    <%= f.text_area :description, class: "form-control"%>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :price %><br>
-    <%= f.number_field :price, :class => 'text_field', :step => 0.1 %>
+    <%= f.number_field :price, :class => 'text_field', :step => 0.1, class: "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :photo %><br>
-    <%= f.file_field :photo %>
+    <%= f.file_field :photo%>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create Product", class: 'btn btn-primary' %>
   </div>
 <% end %>

@@ -6,8 +6,11 @@ class ApplicationController < ActionController::Base
 
   def current_order
     @order = current_user.orders.find_by(state: "active")
-    rescue ActiveRecord::RecordNotFound
-    @order = current_user.orders.create
-    @order
+    if @order 
+      @order
+    else
+      @order = current_user.orders.create
+      @order
+    end
   end
 end
