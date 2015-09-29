@@ -22,7 +22,7 @@ class OrderProductsController < ApplicationController
 
    respond_to do |format|
      if @order_product.save
-       format.html { redirect_to @order_product.order,notice: 'Order product was successfully created.' }
+       format.html { redirect_to @order_product.order}
        format.json { render action: 'show', status: :created, location: @order_product }
      else
        format.html { render action: 'new' }
@@ -36,7 +36,7 @@ class OrderProductsController < ApplicationController
     @order = current_order
     respond_to do |format|
       if @order_product.update(order_product_params)
-        format.html { redirect_to @order, notice: 'Order product was successfully updated.' }
+        format.html { redirect_to @order }
         format.json { render :show, status: :ok, location: @order_product }
       else
         format.html { render :edit }
@@ -50,7 +50,7 @@ class OrderProductsController < ApplicationController
     @order = current_order
     @order_product.destroy
     respond_to do |format|
-      format.html { redirect_to @order, notice: 'Order product was successfully destroyed.' }
+      format.html { redirect_to @order }
       format.json { head :no_content }
     end
   end

@@ -15,7 +15,9 @@
 <% if alert %>
   <p class="alert alert-danger"><%= alert %></p>
 <% end %>
+
  <%= yield %>
+ <%= render 'layouts/carousel'%>
  <%= render 'layouts/footer'%>
 </div> 
 
