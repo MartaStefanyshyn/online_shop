@@ -3,13 +3,14 @@
   <div class="row">
     <% group.compact.each do |product| %>
       <div class="col-md-4">
-        <%= image_tag product.photo.url(:medium)%>
+        <%= image_tag product.photo.url, width: "140", height: "150"%>
         <h4><%= link_to product.name, product %></h4>
         <p>Price: <%= number_to_currency(product.price) %></p>
         <%= button_to 'Add to Order', order_products_path(product_id: product), :class => "btn btn-primary"%>
       </div>
     <% end %>
   </div>
+  <br>
 <% end %>
 <br>
 <% if current_user.role == "admin" %>
