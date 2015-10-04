@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
       if !user_signed_in?
         redirect_to root_path
       else
-	      @products = Product.all
+	      @products = Product.all.page(params[:page]).per(2)
       end
 	  end
 

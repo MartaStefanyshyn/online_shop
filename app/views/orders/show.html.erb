@@ -1,31 +1,30 @@
-<div class="container-fluid">
+<div class="container">
 
 <h1>Your Order</h1>
-
-<% @order.order_products.each do |item| %>
 <div class="main-content">
-<div class="row">
-  <div class="col-md-4">
-    <%= image_tag item.product.photo.url(:large) %> 
-  </div>
-  <div class="col-md-4">
-    <%= item.product.name %><br>
-        <%= item.product.description %>
-  </div>
-  <div class="col-md-4">
-    <%= number_to_currency(item.product.price)%><br>
-  </div>
- </div>
-</div>
+<% @order.order_products.each do |item| %>
+<ul class="list-inline">
+ <li><%= image_tag item.product.photo.url, width: "140", height: "150" %> </li>
+ <li><b><%= item.product.name %></b><br>
+        <%= item.product.description %></li>
+ <li><b>Price:</b><br><%= number_to_currency(item.product.price)%><br></li>
+ <li id="amount"><b>Quantity:</b> <%= item.amount %></li>
+ <li><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %></li>
+
+      <li><%= link_to 'Edit', edit_order_product_path(item), id: "edit_link",  remote: true %><li>
+      </ul>
 <% end %>
-<div class="secondary-content">
- <div class="col-sm-3">
-   Total: <%= @order.total %>
- </div>
-</div>  
+</br>
 <% if @order.state == "active" %>
-<%= link_to 'Buy', finish_order_path(@order), data: { confirm: 'Are you sure you want to finish this order?' } , class: 'btn btn-primary', "data-popup" => true %>
+<span class="buy"><%= link_to 'Continue Shopping', products_path , class: 'btn btn-primary', "data-popup" => true %></span>
+<span class="continue"><%= link_to 'Buy', finish_order_path(@order), data: { confirm: 'Are you sure you want to finish this order?' } , class: 'btn btn-primary', "data-popup" => true %></span>
 <% end %>
+</div>
+<div class="secondary-content">
+   <b><p class="bucket">Busket summary</p><br></b>
+   <hr>
+   <b>Total: <%= number_to_currency @order.total %></b>
+</div>  
 </div>
 </br>
 <%= link_to orders_path, class: 'btn btn-info btn-xs' do%>

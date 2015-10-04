@@ -13,6 +13,9 @@ class OrderProductsController < ApplicationController
   end
 
   def edit
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create
@@ -38,6 +41,7 @@ class OrderProductsController < ApplicationController
       if @order_product.update(order_product_params)
         format.html { redirect_to @order }
         format.json { render :show, status: :ok, location: @order_product }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @order_product.errors, status: :unprocessable_entity }
@@ -73,6 +77,14 @@ class OrderProductsController < ApplicationController
     @order_product.amount +=1
     @order_product.save
     redirect_to @order
+  end
+
+  def from_order
+    @order = current_order
+    @selected = OrderProduct.find_by(order_id: @order.id)
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

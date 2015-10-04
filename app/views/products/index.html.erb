@@ -1,4 +1,5 @@
 <h1>Products</h1>
+<div class="container">
 <% @products.in_groups_of(3) do |group| %>
   <div class="row">
     <% group.compact.each do |product| %>
@@ -12,6 +13,8 @@
   </div>
   <br>
 <% end %>
+<div class="center"><%= paginate @products %></div>
+</div>
 <br>
 <% if current_user.role == "admin" %>
 <%= link_to new_product_path, class: 'btn btn-success' do %>

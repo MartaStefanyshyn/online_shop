@@ -1,0 +1,11 @@
+<% @order_products.each do |order_product| %>
+<ul class="list-inline">
+ <li><%= image_tag order_product.product.photo.url, width: "140", height: "150" %> </li>
+ <li><b><%= order_product.product.name %></b><br>
+        <%= order_product.product.description %></li>
+ <li><b>Price:</b><br><%= number_to_currency(order_product.product.price)%><br></li>
+ <li id="amount"><b>Quantity:</b> <%= order_product.amount %></li>
+ <li><%= link_to 'Destroy', order_product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %></li>
+ <li><%= link_to 'Edit', edit_order_product_path(order_product), id: "edit_link",  remote: true %><li>
+</ul>
+ <% end %>

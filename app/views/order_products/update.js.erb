@@ -1,0 +1,6 @@
+$('#edit_order_product_<%= @order_product.id %>').remove();
+$('#edit_link').show();
+$('#edit_link').hide().after('<%= j render("form") %>')
+$('#order_product_<%= @order_product.id %>').fadeOut(500, function(){
+});
+alert("Updated");
